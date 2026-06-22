@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="p3.jfif">
+<title>Digital Clock</title>
+
+<style>
+ .header
+	{
+      text-align: center;
+	  padding-top: 20px;
+      font-size: 32px;
+	  color:#8e0000;
+    }
+
+@font-face {
+    font-family: 'Digital7';
+    src: url(digital-7.ttf) format('truetype');
+}
+
+body {
+    font-family: 'Digital7', monospace;
+}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#000;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    font-family:"DS-Digital","Digital-7","Courier New",monospace;
+}
+
+.clock{
+    text-align:center;
+}
+
+#date{
+    font-size:32px;
+    letter-spacing:4px;
+    color:#2ebae8;
+    text-shadow:none;
+}
+
+.week{
+    color:red;
+    text-shadow:none;
+}
+
+#time
+{
+    font-size:120px;
+    color:#2ebae8;
+    text-shadow:none;
+       
+}
+</style>
+</head>
+<body>
+
+<div class="header">Mika</div>
+
+
+<div class="clock">
+    <p id="date"></p>
+    <p id="time"></p>
+</div>
+
+<script>
+const WEEK = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
+
+function updateTime() {
+    const now = new Date();
+
+    document.getElementById("time").innerText =
+        zeroPadding(now.getHours(),2) + ":" +
+        zeroPadding(now.getMinutes(),2) + ":" +
+        zeroPadding(now.getSeconds(),2);
+
+    document.getElementById("date").innerHTML =
+        now.getFullYear() + "-" +
+        zeroPadding(now.getMonth()+1,2) + "-" +
+        zeroPadding(now.getDate(),2) +
+        " <span class='week'>" +
+        WEEK[now.getDay()] +
+        "</span>";
+}
+
+function zeroPadding(num,digit){
+    return String(num).padStart(digit,'0');
+}
+
+updateTime();
+setInterval(updateTime,1000);
+</script>
+
+</body>
+</html>
